@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shopping {
     public static void main(String[] args) {
         System.out.println("Вас приветствует список покупок!");
 
-        int listLength = 3; //начальная длина массива
+        int listLength = 8; //начальная длина массива
         String[] shoppingList = new String[listLength];
         int productCount = 0; // переменная для подсчёта добавленных товаров
         Scanner scanner = new Scanner(System.in);
@@ -55,6 +56,9 @@ public class Shopping {
                 }
 
             } else if (actionNumber == 3) { //очистить список
+                for (int i = 0; i < productCount; i++) {
+                    shoppingList[i] = null;
+                }
                 productCount = 0;
                 System.out.println("Список покупок теперь пуст.");
 

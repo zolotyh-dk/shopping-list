@@ -4,7 +4,7 @@ public class Shopping {
     public static void main(String[] args) {
         System.out.println("Вас приветствует список покупок!");
 
-        int listLength = 8;
+        int listLength = 8; //начальная длина массива
         String[] shoppingList = new String[listLength];
         int productCount = 0; // переменная для подсчёта добавленных товаров
         Scanner scanner = new Scanner(System.in);
@@ -19,16 +19,29 @@ public class Shopping {
             int actionNumber = scanner.nextInt();
 
             if (actionNumber == 1) { //добавить товар
-                if (productCount <= shoppingList.length) {
+                if (productCount < shoppingList.length) {
                     System.out.println("Введите товар для добавления в список покупок.");
                     String productName = scanner.next();
-                    shoppingList[productCount] = productName;
-                    productCount++;
-                    System.out.println("Товар " + productName + " добавлен в список под номером " + productCount);
+                    boolean isDuplicate = false;
+                    for (int i = 0; i < productCount; i++) {
+                        if (shoppingList[i].equals(productName)) {
+                            isDuplicate = true;
+                            System.out.println("Товар " + productName + " уже есть в списке под номером " + (i + 1));
+                            break;
+                        }
+                    }
+                    if (!isDuplicate) {
+                        shoppingList[productCount] = productName;
+                        productCount++;
+                        System.out.println("Товар " + productName + " добавлен в список под номером " + productCount);
+                    }
                 } else {
                     System.out.println("Список заполнен! Отложите покупку до следующего раза.");
                 }
             } else if (actionNumber == 2) { //показать список
+                if (productCount == 0) {
+                    System.out.println("Список покупок пуст.");
+                }
                 for (int i = 0; i < productCount; i++) {
                     System.out.println((i + 1) + ". " + shoppingList[i]);
                 }
